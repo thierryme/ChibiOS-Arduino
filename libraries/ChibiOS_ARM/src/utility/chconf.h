@@ -25,8 +25,10 @@
  * @{
  */
 
+
 #ifndef _CHCONF_H_
 #define _CHCONF_H_
+
 
 /*===========================================================================*/
 /**
@@ -333,7 +335,7 @@
  *
  * @note    The default is @p FALSE.
  */
-#define CH_DBG_SYSTEM_STATE_CHECK           FALSE
+#define CH_DBG_SYSTEM_STATE_CHECK           TRUE
 
 /**
  * @brief   Debug option, parameters checks.
@@ -421,6 +423,7 @@
  */
 #define CH_CFG_THREAD_INIT_HOOK(tp) {                                       \
   /* Add threads initialization code here.*/                                \
+  chThreadInitHook(tp);                                                       \
 }
 
 /**
@@ -433,6 +436,7 @@
  */
 #define CH_CFG_THREAD_EXIT_HOOK(tp) {                                       \
   /* Add threads finalization code here.*/                                  \
+  chThreadExitHook(tp);                                                       \
 }
 
 /**
@@ -441,6 +445,7 @@
  */
 #define CH_CFG_CONTEXT_SWITCH_HOOK(ntp, otp) {                              \
   /* Context switch code here.*/                                            \
+  chContextSwitchHook(ntp, otp);                                              \
 }
 
 /**
@@ -450,6 +455,7 @@
  * @note    This macro can be used to activate a power saving mode.
  */
 #define CH_CFG_IDLE_ENTER_HOOK() {                                          \
+  chIdleEnterHook();                                                          \
 }
 
 /**
@@ -459,6 +465,7 @@
  * @note    This macro can be used to deactivate a power saving mode.
  */
 #define CH_CFG_IDLE_LEAVE_HOOK() {                                          \
+ chIdleLeaveHook();                                                           \
 }
 
 /**
@@ -467,6 +474,7 @@
  */
 #define CH_CFG_IDLE_LOOP_HOOK() {                                           \
   /* Idle loop code here.*/                                                 \
+ chIdleLoopHook();                                                            \
 }
 
 /**
@@ -476,6 +484,7 @@
  */
 #define CH_CFG_SYSTEM_TICK_HOOK() {                                         \
   /* System tick event code here.*/                                         \
+  chSystemTickHook();                                                         \
 }
 
 /**
@@ -485,6 +494,7 @@
  */
 #define CH_CFG_SYSTEM_HALT_HOOK(reason) {                                   \
   /* System halt code here.*/                                               \
+  chSystemHaltHook(reason);                                                   \
 }
 
 /** @} */

@@ -79,6 +79,8 @@
 #include "chsys.h"
 #include "chvt.h"
 #include "chthreads.h"
+/* Added Core hooks header */
+#include "chkernelhooks.h"
 
 /* Optional subsystems headers.*/
 #include "chregistry.h"
