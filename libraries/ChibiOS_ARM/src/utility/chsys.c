@@ -165,12 +165,13 @@ void chSysInit(void) {
  */
 void chSysHalt(const char *reason) {
 
-  port_disable();
+  // port_disable();
 
 #if defined(CH_CFG_SYSTEM_HALT_HOOK) || defined(__DOXYGEN__)
   CH_CFG_SYSTEM_HALT_HOOK(reason);
 #endif
 
+  port_disable();
   /* Pointing to the passed message.*/
   ch.dbg.panic_msg = reason;
 
