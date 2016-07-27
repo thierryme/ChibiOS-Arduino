@@ -92,7 +92,7 @@ static void _idle_thread(void *p) {
  */
 void chSysInit(void) {
 #if CH_DBG_ENABLE_STACK_CHECK == TRUE
-  extern stkalign_t __main_thread_stack_base__;
+  extern stkalign_t _estack;//__main_thread_stack_base__;
 #endif
 
   port_init();
@@ -126,7 +126,7 @@ void chSysInit(void) {
 #if CH_DBG_ENABLE_STACK_CHECK == TRUE
   /* This is a special case because the main thread thread_t structure is not
      adjacent to its stack area.*/
-  currp->p_stklimit = &__main_thread_stack_base__;
+  currp->p_stklimit = &_estack;//__main_thread_stack_base__;
 #endif
   chSysEnable();
 
