@@ -60,6 +60,19 @@
  */
 #define CH_CFG_ST_TIMEDELTA                 0 // WHG
 
+
+
+/**
+ * @brief   Stack size for the system idle thread.
+ * @details This size depends on the idle thread implementation, usually
+ *          the idle thread should take no more space than those reserved
+ *          by @p PORT_INT_REQUIRED_STACK.
+ * @note    In this port it is set to 16 because the idle thread does have
+ *          a stack frame when compiling without optimizations. You may
+ *          reduce this value to zero when compiling with optimizations.
+ */
+#define PORT_IDLE_THREAD_STACK_SIZE     16
+
 /** @} */
 
 /*===========================================================================*/
@@ -326,7 +339,7 @@
  *
  * @note    The default is @p FALSE.
  */
-#define CH_DBG_STATISTICS                   FALSE
+#define CH_DBG_STATISTICS                   TRUE
 
 /**
  * @brief   Debug option, system state check.
@@ -344,7 +357,7 @@
  *
  * @note    The default is @p FALSE.
  */
-#define CH_DBG_ENABLE_CHECKS                FALSE
+#define CH_DBG_ENABLE_CHECKS                TRUE
 
 /**
  * @brief   Debug option, consistency checks.
@@ -354,7 +367,7 @@
  *
  * @note    The default is @p FALSE.
  */
-#define CH_DBG_ENABLE_ASSERTS               FALSE
+#define CH_DBG_ENABLE_ASSERTS               TRUE
 
 /**
  * @brief   Debug option, trace buffer.
@@ -363,7 +376,7 @@
  *
  * @note    The default is @p FALSE.
  */
-#define CH_DBG_ENABLE_TRACE                 FALSE
+#define CH_DBG_ENABLE_TRACE                 TRUE
 
 /**
  * @brief   Debug option, stack checks.
@@ -386,7 +399,7 @@
  * @note    The default is @p FALSE.
  */
 #define CH_DBG_FILL_THREADS                 TRUE  // WHG
-
+ 
 /**
  * @brief   Debug option, threads profiling.
  * @details If enabled then a field is added to the @p thread_t structure that
@@ -396,7 +409,7 @@
  * @note    This debug option is not currently compatible with the
  *          tickless mode.
  */
-#define CH_DBG_THREADS_PROFILING            FALSE
+#define CH_DBG_THREADS_PROFILING            TRUE
 
 /** @} */
 
@@ -412,6 +425,7 @@
  * @details User fields added to the end of the @p thread_t structure.
  */
 #define CH_CFG_THREAD_EXTRA_FIELDS                                          \
+ int log_id;
   /* Add threads custom fields here.*/
 
 /**
@@ -455,7 +469,7 @@
  * @note    This macro can be used to activate a power saving mode.
  */
 #define CH_CFG_IDLE_ENTER_HOOK() {                                          \
-  chIdleEnterHook();                                                          \
+  chIdleEnterHook();                                                        \
 }
 
 /**
